@@ -40,7 +40,11 @@
     "@angular/tsc-wrapped": "~4.2.0",
     "@angular/upgrade": "~4.2.0",
     "angular-in-memory-web-api": "~0.3.2",
+    "body-parser": "^1.17.2",
     "core-js": "^2.4.1",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.30",
+    "mongoose": "^4.11.5",
     "rxjs": "^5.1.0",
     "systemjs": "0.19.39",
     "zone.js": "^0.8.4"
