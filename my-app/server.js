@@ -8,11 +8,14 @@ var CONTACTS_COLLECTION = "children";
 var app = express();
 app.use(bodyParser.json());
 
+var distDir = __dirname + "/dist/";
+app.use(express.static(distDir));
+
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect(("mongodb://localhost:27017/", function (err, database) {
+mongodb.MongoClient.connect("mongodb://heroku_ws02q2n4:81ipi9qvak72fiht3aebr51fdd@ds135963.mlab.com:35963/heroku_ws02q2n4", function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
@@ -23,11 +26,11 @@ mongodb.MongoClient.connect(("mongodb://localhost:27017/", function (err, databa
   console.log("Database connection ready");
 
   // Initialize the app.
-  var server = app.listen(process.env.PORT || 3000, function () {
+  var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
     console.log("App now running on port", port);
   });
-}));
+});
 
 // CONTACTS API ROUTES BELOW
 
@@ -76,7 +79,7 @@ app.post("/api/heroes", function(req, res) {
  */
 
 app.get("/api/heroes/:id", function(req, res) {
-  db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
+  db.collection(CONTACTS_COLLECTION).findOne({ id: new ObjectID(req.params.id) }, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to get contact");
     } else {
@@ -87,9 +90,9 @@ app.get("/api/heroes/:id", function(req, res) {
 
 app.put("/api/heroes/:id", function(req, res) {
   var updateDoc = req.body;
-  delete updateDoc._id;
+  delete updateDoc.id;
 
-  db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
+  db.collection(CONTACTS_COLLECTION).updateOne({id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to update contact");
     } else {
