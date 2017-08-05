@@ -1,0 +1,47 @@
+<div *ngIf="hero">
+  <h2>{{hero.name}}</h2>
+  <div>
+    <label>id: </label>{{hero.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="hero.name" placeholder="name" />
+   </div>
+    <div>
+    <label>dob: </label>
+    <input [(ngModel)]="hero.dob" placeholder="dob" />
+   </div>
+
+   <div>
+    <label> gender: </label>
+    <input [(ngModel)]="hero.gender" placeholder="gender" />
+   </div>
+
+   <div>
+    <label>diagnosis: </label>
+    <input [(ngModel)]="hero.diagnosis" placeholder="diagnosis" />
+   </div>
+
+   <div>
+    <label>gmfcs_level: </label>
+    <input [(ngModel)]="hero.gmfcs_level" placeholder="gmfcs_level" />
+   </div>
+
+   <div>
+    <label>caregiver: </label>
+    <input [(ngModel)]="hero.caregiver_name" placeholder="caregiver_name" />
+   </div>
+
+   <div>
+    <label> contact: </label>
+    <input [(ngModel)]="hero.contact" placeholder="contact" />
+   </div>
+
+    <div>
+    <label> area: </label>
+    <input [(ngModel)]="hero.residential_area" placeholder="residential_area" />
+   </div>
+
+   
+  <button (click)="goBack()">Back</button>
+  <button (click)="save()">Save</button>
+</div>
