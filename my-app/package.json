@@ -1,8 +1,8 @@
 {
-  "name": "angular-io-example",
+  "name": "sukumani-dream",
   "version": "1.0.0",
   "private": true,
-  "description": "Example project from an angular.io guide.",
+  "description": "sukumani-dream site",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
