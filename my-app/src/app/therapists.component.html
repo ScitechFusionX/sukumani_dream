@@ -1,0 +1,22 @@
+<h2>Therapists</h2>
+<div>
+  <label>Hero name:</label> <input #therapistName />
+  <button (click)="add(therapistName.value); therapistName.value=''">
+    Add
+  </button>
+</div>
+<ul class="therapists">
+  <li *ngFor="let therapist of therapists" (click)="onSelect(therapist)"
+      [class.selected]="therapist === selectedTherapist">
+    <span class="badge">{{therapist._id}}</span>
+    <span>{{therapist.name}}</span>
+    <button class="delete"
+      (click)="delete(therapist); $event.stopPropagation()">x</button>
+  </li>
+</ul>
+<div *ngIf="selectedTherapist">
+  <h2>
+    {{selectedTherapist.name | uppercase}} selected
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>

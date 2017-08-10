@@ -5,16 +5,18 @@ import { HttpModule }    from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
-// Imports for loading & configuring the in-memory web api
-
-
-
 import { AppComponent }         from './app.component';
 import { DashboardComponent }   from './dashboard.component';
 import { HeroesComponent }      from './heroes.component';
 import { HeroDetailComponent }  from './hero-detail.component';
 import { HeroService }          from './hero.service';
 import { HeroSearchComponent }  from './hero-search.component';
+
+import { TherapistsComponent }      from './therapists.component';
+import { TherapistDetailComponent }  from './therapist-detail.component';
+import { TherapistService }          from './therapist.service';
+
+
 
 @NgModule({
   imports: [
@@ -26,11 +28,17 @@ import { HeroSearchComponent }  from './hero-search.component';
   declarations: [
     AppComponent,
     DashboardComponent,
+
     HeroDetailComponent,
     HeroesComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+
+    TherapistDetailComponent,
+    TherapistsComponent,
+   
+
   ],
-  providers: [ HeroService ],
+  providers: [ HeroService, TherapistService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
