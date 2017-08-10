@@ -1,6 +1,6 @@
 <h2>Therapists</h2>
 <div>
-  <label>Hero name:</label> <input #therapistName />
+  <label>Therapist name:</label> <input #therapistName />
   <button (click)="add(therapistName.value); therapistName.value=''">
     Add
   </button>
@@ -8,7 +8,7 @@
 <ul class="therapists">
   <li *ngFor="let therapist of therapists" (click)="onSelect(therapist)"
       [class.selected]="therapist === selectedTherapist">
-    <span class="badge">{{therapist._id}}</span>
+    <span class="badge">{{therapist.id}}</span>
     <span>{{therapist.name}}</span>
     <button class="delete"
       (click)="delete(therapist); $event.stopPropagation()">x</button>

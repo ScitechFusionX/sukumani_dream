@@ -34,4 +34,11 @@ export class HeroDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+  addTherapist() : void{
+    var child_id = this.hero._id;
+  }
+
+  addStand() : void{
+    var child_id = this.hero._id;
+  }
 }

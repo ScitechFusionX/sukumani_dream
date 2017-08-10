@@ -8,8 +8,8 @@ import { TherapistService } from './therapist.service';
 
 @Component({
   selector: 'therapist-detail',
-  templateUrl: './therapists-detail.component.html',
-  styleUrls: [ './therapists-detail.component.css' ]
+  templateUrl: './therapist-detail.component.html',
+  styleUrls: [ './therapist-detail.component.css' ]
 })
 export class TherapistDetailComponent implements OnInit {
   therapist: Therapist;
