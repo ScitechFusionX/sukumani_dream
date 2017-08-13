@@ -12,9 +12,7 @@ import { HeroDetailComponent }  from './hero-detail.component';
 import { HeroService }          from './hero.service';
 import { HeroSearchComponent }  from './hero-search.component';
 
-import { TherapistsComponent }      from './therapists.component';
-import { TherapistDetailComponent }  from './therapist-detail.component';
-import { TherapistService }          from './therapist.service';
+
 
 
 
@@ -33,12 +31,11 @@ import { TherapistService }          from './therapist.service';
     HeroesComponent,
     HeroSearchComponent,
 
-    TherapistDetailComponent,
-    TherapistsComponent,
+  
    
 
   ],
-  providers: [ HeroService, TherapistService ],
+  providers: [ HeroService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
