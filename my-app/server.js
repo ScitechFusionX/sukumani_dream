@@ -4,7 +4,7 @@ var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 
 var CONTACTS_COLLECTION = "heroes";
-var THERAPISTS_COLLECTION = "therapists";
+
 
 var app = express();
 app.use(bodyParser.json());
@@ -80,6 +80,7 @@ app.post('/api/heroes', function(req, res) {
  */
 
 app.get("/api/heroes/:id", function(req, res) {
+  console.log("my id: ",req.params.id);
   obj_id = ObjectID.createFromHexString(req.params.id)
   db.collection(CONTACTS_COLLECTION).findOne({ _id: obj_id }, function(err, doc) {
     if (err) {
@@ -91,7 +92,7 @@ app.get("/api/heroes/:id", function(req, res) {
 });
 
 app.put("/api/heroes/:id", function(req, res) {
-
+  console.log("WENT IN");
   obj_id = ObjectID.createFromHexString(req.params.id)
   var updateDoc = req.body;
   delete updateDoc._id;
@@ -111,116 +112,6 @@ app.put("/api/heroes/:id", function(req, res) {
 
 app.delete("/api/heroes/:id", function(req, res) {
   db.collection(CONTACTS_COLLECTION).deleteOne({_id: obj_id}, function(err, result) {
-    if (err) {
-      handleError(res, err.message, "Failed to delete contact");
-    } else {
-      res.status(200).json(req.params.id);
-    }
-  });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-app.get('/api/therapists', function(req, res) {
-   console.log("WORKED ");
-  db.collection(THERAPISTS_COLLECTION).find({}).toArray(function(err, docs) {
-    if (err) {
-      handleError(res, err.message, "Failed to get contacts.");
-    } else {
-      console.log("WORKED111 ");
-      res.status(200).json(docs);
-    }
-  });
-});
-
-app.post('/api/therapists', function(req, res) {
-  var newContact = req.body;
-  //newContact.createDate = new Date();
-console.log("WORKED222 ");
-  if (!req.body.name) {
-   handleError(res, "Invalid user input", "Must provide a name.", 400);
-  }
-
-  db.collection(THERAPISTS_COLLECTION).insertOne(newContact, function(err, doc) {
-    if (err) {
-      handleError(res, err.message, "Failed to create new contact.");
-    } else {
-      console.log("WORKED 3333");
-      res.status(201).json(doc.ops[0]);
-    }
-  });
-});
-
-/*  "/api/heroes/:id"
- *    GET: find contact by id
- *    PUT: update contact by id
- *    DELETE: deletes contact by id
- */
-
-app.get("/api/therapists/:id", function(req, res) {
-  obj_id = ObjectID.createFromHexString(req.params.id)
-  db.collection(THERAPISTS_COLLECTION).findOne({ _id: obj_id }, function(err, doc) {
-    if (err) {
-      handleError(res, err.message, "Failed to get contact");
-    } else {
-      res.status(200).json(doc);
-    }
-  });
-});
-
-app.put("/api/therapists/:id", function(req, res) {
-
-  obj_id = ObjectID.createFromHexString(req.params.id)
-  var updateDoc = req.body;
-  delete updateDoc._id;
-
-  db.collection(THERAPISTS_COLLECTION).updateOne({_id: obj_id}, updateDoc, function(err, doc) {
-    if (err) {
-      handleError(res, err.message, "Failed to update contact");
-    } else {
-      updateDoc._id = req.params.id;
-      updateDoc.name = req.params.name;
-      
-
-      res.status(200).json(updateDoc);
-    }
-  });
-});
-
-app.delete("/api/therapists/:id", function(req, res) {
-  db.collection(THERAPISTS_COLLECTION).deleteOne({_id: obj_id}, function(err, result) {
     if (err) {
       handleError(res, err.message, "Failed to delete contact");
     } else {

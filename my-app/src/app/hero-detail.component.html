@@ -1,7 +1,8 @@
 <div *ngIf="hero">
   <h2>{{hero.name}}</h2>
   <div>
-    <label>id: </label>{{hero._id}}</div>
+    <label>id: </label>{{hero._id}}
+    </div>
   <div>
     <label>name: </label>
     <input [(ngModel)]="hero.name" placeholder="name" />
@@ -40,67 +41,47 @@
     <label> area: </label>
     <input [(ngModel)]="hero.residential_area" placeholder="residential_area" />
    </div>
-   
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <div>
-<div>
-<label>therapist_name: </label>
+    <label>Therapist </label>
+    </div>
+ <div>
+<label>name: </label>
     <input [(ngModel)]="hero.therapist_name" placeholder="therapist_name" />
    </div>
     <div>
-    <label>therapist_hospital: </label>
+    <label>hospital: </label>
     <input [(ngModel)]="hero.hospital" placeholder="hospital" />
    </div>
 
    <div>
-    <label> therapist_email: </label>
+    <label> email: </label>
     <input [(ngModel)]="hero.email" placeholder="email" />
    </div>
 
    <div>
-    <label>therapist_phone: </label>
+    <label>phone: </label>
     <input [(ngModel)]="hero.phone" placeholder="phone" />
    </div>
-  </div>
-
-
 
 
 <div>
+    <label>Stand </label>
+    </div>
 
 <div>
+    <label>stand_serial: </label>
+    <input [(ngModel)]="hero.stand_serial" placeholder="stand_serial" />
+   </div>
+
+ <div>
     <label>adjustments_to_footrest: </label>
     <input [(ngModel)]="hero.adjustments_to_footrest" placeholder="adjustments_to_footrest" />
    </div>
     <div>
     <label>footrest_height: </label>
     <input [(ngModel)]="hero.footrest_height" placeholder="footrest_height" />
-   </div>
-
-   <div>
-    <label> email: </label>
-    <input [(ngModel)]="hero.nipple_to_heel" placeholder="nipple_to_heel" />
    </div>
 
    <div>
@@ -120,16 +101,17 @@
    </div>
 
    <div>
+    <label>ordered: </label>
+    <input [(ngModel)]="hero.ordered" placeholder="ordered" />
+   </div>
+
+   <div>
     <label>recieved: </label>
     <input [(ngModel)]="hero.recieved" placeholder="recieved" />
    </div>
 
- </div>
-
-
-
    
   <button (click)="goBack()">Back</button>
   <button (click)="save()">Save</button>
- 
+
 </div>

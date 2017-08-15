@@ -23,6 +23,7 @@ export class HeroService {
 
   getHero(id: string): Promise<Hero> {
     const url = `${this.heroesUrl}/${id}`;
+    console.log("my url: ",url);
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as Hero)
