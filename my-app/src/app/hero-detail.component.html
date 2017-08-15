@@ -1,7 +1,8 @@
 <div *ngIf="hero">
   <h2>{{hero.name}}</h2>
   <div>
-    <label>id: </label>{{hero._id}}</div>
+    <label>id: </label>{{hero._id}}
+    </div>
   <div>
     <label>name: </label>
     <input [(ngModel)]="hero.name" placeholder="name" />
@@ -41,7 +42,76 @@
     <input [(ngModel)]="hero.residential_area" placeholder="residential_area" />
    </div>
 
+
+<div>
+    <label>Therapist </label>
+    </div>
+ <div>
+<label>name: </label>
+    <input [(ngModel)]="hero.therapist_name" placeholder="therapist_name" />
+   </div>
+    <div>
+    <label>hospital: </label>
+    <input [(ngModel)]="hero.hospital" placeholder="hospital" />
+   </div>
+
+   <div>
+    <label> email: </label>
+    <input [(ngModel)]="hero.email" placeholder="email" />
+   </div>
+
+   <div>
+    <label>phone: </label>
+    <input [(ngModel)]="hero.phone" placeholder="phone" />
+   </div>
+
+
+<div>
+    <label>Stand </label>
+    </div>
+
+<div>
+    <label>stand_serial: </label>
+    <input [(ngModel)]="hero.stand_serial" placeholder="stand_serial" />
+   </div>
+
+ <div>
+    <label>adjustments_to_footrest: </label>
+    <input [(ngModel)]="hero.adjustments_to_footrest" placeholder="adjustments_to_footrest" />
+   </div>
+    <div>
+    <label>footrest_height: </label>
+    <input [(ngModel)]="hero.footrest_height" placeholder="footrest_height" />
+   </div>
+
+   <div>
+    <label>buttocks_cushion_size: </label>
+    <input [(ngModel)]="hero.buttocks_cushion_size" placeholder="buttocks_cushion_size" />
+   </div>
+
+<div>
+    <label>have_taken_photo: </label>
+    <input [(ngModel)]="hero.have_taken_photo" placeholder="have_taken_photo" />
+   </div>
+
+    
+    <div>
+    <label>date: </label>
+    <input [(ngModel)]="hero.date" placeholder="date" />
+   </div>
+
+   <div>
+    <label>ordered: </label>
+    <input [(ngModel)]="hero.ordered" placeholder="ordered" />
+   </div>
+
+   <div>
+    <label>recieved: </label>
+    <input [(ngModel)]="hero.recieved" placeholder="recieved" />
+   </div>
+
    
   <button (click)="goBack()">Back</button>
   <button (click)="save()">Save</button>
+
 </div>

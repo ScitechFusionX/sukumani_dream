@@ -5,6 +5,7 @@ var ObjectID = mongodb.ObjectID;
 
 var CONTACTS_COLLECTION = "heroes";
 
+
 var app = express();
 app.use(bodyParser.json());
 
@@ -79,6 +80,7 @@ app.post('/api/heroes', function(req, res) {
  */
 
 app.get("/api/heroes/:id", function(req, res) {
+  console.log("my id: ",req.params.id);
   obj_id = ObjectID.createFromHexString(req.params.id)
   db.collection(CONTACTS_COLLECTION).findOne({ _id: obj_id }, function(err, doc) {
     if (err) {
@@ -90,7 +92,7 @@ app.get("/api/heroes/:id", function(req, res) {
 });
 
 app.put("/api/heroes/:id", function(req, res) {
-
+  console.log("WENT IN");
   obj_id = ObjectID.createFromHexString(req.params.id)
   var updateDoc = req.body;
   delete updateDoc._id;
