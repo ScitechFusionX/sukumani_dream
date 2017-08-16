@@ -1,6 +1,8 @@
 label {
   display: inline-block;
   width: 3em;
+  margin: .5em 0;
+  text-align: center;
   color: #607D8B;
   font-weight: bold;
 }
@@ -11,6 +13,7 @@ input {
   padding-left: .4em;
 }
 button {
+  text-align: center;
   margin-top: 20px;
   font-family: Arial;
   background-color: #eee;

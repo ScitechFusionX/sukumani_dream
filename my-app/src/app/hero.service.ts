@@ -19,6 +19,12 @@ export class HeroService {
                .then(response => response.json() as Hero[])
                .catch(this.handleError);
   }
+  getHeroesExport(): Promise<Hero[]> {
+    return this.http.get('/api/heroes/export')
+               .toPromise()
+                .then(response => response.json() as Hero[])
+               .catch(this.handleError);
+  }
 
 
   getHero(id: string): Promise<Hero> {
