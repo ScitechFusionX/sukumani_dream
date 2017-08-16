@@ -1,7 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
-var json2xls = require("json2xls");
+//var json2xls = require("json2xls");
 var ObjectID = mongodb.ObjectID;
 
 var CONTACTS_COLLECTION = "heroes";
@@ -10,7 +10,7 @@ var CONTACTS_COLLECTION = "heroes";
 var app = express();
 app.use(bodyParser.json());
 
-app.use(json2xls.middleware);
+//app.use(json2xls.middleware);
 
 
 var distDir = __dirname + "/dist/";
@@ -61,16 +61,16 @@ app.get('/api/heroes', function(req, res) {
 });
 
 
-app.get('/api/heroes/export', function(req, res) {
-  db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
-    if (err) {
-      handleError(res, err.message, "Failed to get contacts.");
-    } else {
+//app.get('/api/heroes/export', function(req, res) {
+  //db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
+    //if (err) {
+      //handleError(res, err.message, "Failed to get contacts.");
+    //} else {
       //res.status(200).json(docs);
-      res.xls('data.xlsx', docs);
-    }
-  });
-});
+    //  res.xls('data.xlsx', docs);
+   // }
+ // });
+//});
 
 
 
