@@ -1,7 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
-//var json2xls = require("json2xls");
+var json2xls = require("json2xls");
 var ObjectID = mongodb.ObjectID;
 
 var CONTACTS_COLLECTION = "heroes";
@@ -10,7 +10,8 @@ var CONTACTS_COLLECTION = "heroes";
 var app = express();
 app.use(bodyParser.json());
 
-//app.use(json2xls.middleware);
+app.use(json2xls.middleware);
+var fs = require('fs');
 
 
 var distDir = __dirname + "/dist/";
@@ -61,16 +62,18 @@ app.get('/api/heroes', function(req, res) {
 });
 
 
-//app.get('/api/heroes/export', function(req, res) {
-  //db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
-    //if (err) {
-      //handleError(res, err.message, "Failed to get contacts.");
-    //} else {
-      //res.status(200).json(docs);
-    //  res.xls('data.xlsx', docs);
-   // }
- // });
-//});
+app.get('/api/export', function(req, res) {
+  db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get contacts.");
+    } else {
+      res.status(200).json(docs);
+    var xls = json2xls(docs);
+    fs.writeFileSync('data.xlsx', xls, 'binary');
+    res.download('/data.xlsx', 'data.xlsx');
+    }
+ });
+});
 
 
 
@@ -127,6 +130,8 @@ app.put("/api/heroes/:id", function(req, res) {
     }
   });
 });
+
+
 
 app.delete("/api/heroes/:id", function(req, res) {
   db.collection(CONTACTS_COLLECTION).deleteOne({_id: obj_id}, function(err, result) {

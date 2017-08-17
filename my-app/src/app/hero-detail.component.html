@@ -92,7 +92,22 @@
 <div>
     <label>have_taken_photo: </label>
     <input [(ngModel)]="hero.have_taken_photo" placeholder="have_taken_photo" />
-     <button (click)="Upload()">Upload Image</button>
+     <button (click)="view()">View Image</button>
+
+<image-upload
+  [max]="100"
+  [url]="'api/image/upload'"
+  [headers]="[
+    {header: 'Authorization', value: 'MyToken'}
+  ]"
+  [buttonCaption]="'Upload'"
+  [extensions]="['jpg','png','gif']"
+  (onFileUploadFinish)="imageUploaded($event)"
+  (onRemove)="imageRemoved($event)"
+  (isPending)="disableSendButton($event)"
+></image-upload>
+
+
    </div>
 
     

@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   }
 
   export(): void {
-    this.heroService.getHeroesExport()
+    this.heroService.getHeroesExport();
   }
 
 
