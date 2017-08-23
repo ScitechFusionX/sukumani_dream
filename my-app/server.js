@@ -2,9 +2,11 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var json2xls = require("json2xls");
+//var file_saver = require("file-saver");
 var ObjectID = mongodb.ObjectID;
 
 var CONTACTS_COLLECTION = "heroes";
+var USERS_COLLECTION = "users";
 
 
 var app = express();
@@ -70,7 +72,9 @@ app.get('/api/export', function(req, res) {
       res.status(200).json(docs);
     var xls = json2xls(docs);
     fs.writeFileSync('data.xlsx', xls, 'binary');
-    res.download('/data.xlsx', 'data.xlsx');
+    res.download('/data.xlsx')
+    //var file = new File(xls, {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+//saveAs(file, "data.xlsx");
     }
  });
 });
@@ -139,6 +143,43 @@ app.delete("/api/heroes/:id", function(req, res) {
       handleError(res, err.message, "Failed to delete contact");
     } else {
       res.status(200).json(req.params.id);
+    }
+  });
+});
+
+
+
+app.put("'api/upload/:id'", function(req, res) {
+  console.log("WENT IN");
+  obj_id = ObjectID.createFromHexString(req.params.id)
+  var updateDoc = req.body.image;
+  //delete updateDoc._id;
+
+  db.collection(CONTACTS_COLLECTION).updateOne({_id: obj_id}, updateDoc, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to update contact");
+    } else {
+      updateDoc._id = req.params.id;
+      updateDoc.name = req.params.name;
+      
+
+      res.status(200).json(updateDoc);
+    }
+  });
+});
+
+
+
+app.get("/api/login", function(req, res) {
+  console.log("my body: ",req.params.body);
+   var username = req.body.username;
+   var password = req.body.password;
+  
+  db.collection(USERS_COLLECTION).findOne({username: username, password:password}, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to get contact");
+    } else {
+      res.status(200).json(doc);
     }
   });
 });

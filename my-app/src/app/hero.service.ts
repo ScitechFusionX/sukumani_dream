@@ -10,6 +10,7 @@ export class HeroService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private heroesUrl = 'api/heroes';  // URL to web api
+  private loginUrl = 'api/login';
 
   constructor(private http: Http) { }
 
@@ -24,6 +25,15 @@ export class HeroService {
                .toPromise()
                 .then(response => response.json() as Hero[])
                .catch(this.handleError);
+  }
+
+  login(name: string, pass:string): Promise<Hero> {
+    let data = {"username":name, "password":pass}
+    return this.http
+      .post(this.loginUrl, JSON.stringify(data), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data as Hero)
+      .catch(this.handleError);
   }
 
 
@@ -51,6 +61,8 @@ export class HeroService {
       .then(res => res.json().data as Hero)
       .catch(this.handleError);
   }
+
+
 
   update(hero: Hero): Promise<Hero> {
     const url = `${this.heroesUrl}/${hero._id}`;

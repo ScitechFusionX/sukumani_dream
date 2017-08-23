@@ -10,16 +10,11 @@ import { HeroService } from './hero.service';
   styleUrls: [ './login.component.css' ]
 })
 export class LoginComponent {
+ constructor(
+    private heroService: HeroService,
+  ) {}
 
-
-
-  login(): void {
-    //this.heroService.getHeroesExport();
+    loginAccount(name:string, password:string): void {
+      this.heroService.login(name,password);
   }
-  register(): void {
-    //this.heroService.getHeroesExport();
-  }
-
-
-
 }
