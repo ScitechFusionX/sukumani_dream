@@ -94,18 +94,12 @@
     <input [(ngModel)]="hero.have_taken_photo" placeholder="have_taken_photo" />
      <button (click)="view()">View Image</button>
 
-<image-upload
-  [max]="100"
-  [url]="'api/upload/:id'"
-  [headers]="[
-    {header: 'Authorization', value: 'MyToken'}
-  ]"
-  [buttonCaption]="'Upload'"
-  [extensions]="['jpg','png','gif']"
-  (onFileUploadFinish)="imageUploaded($event)"
-  (onRemove)="imageRemoved($event)"
-  (isPending)="disableSendButton($event)"
-></image-upload>
+<button
+  type="button"
+  ngFilePicker
+  (filePick)="file = onChange($event)">
+  Browse
+</button>
 
 
    </div>

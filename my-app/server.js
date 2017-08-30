@@ -2,6 +2,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var json2xls = require("json2xls");
+
+var mime = require('mime');
 //var file_saver = require("file-saver");
 var ObjectID = mongodb.ObjectID;
 
@@ -66,15 +68,20 @@ app.get('/api/heroes', function(req, res) {
 
 app.get('/api/export', function(req, res) {
   db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
+    
     if (err) {
       handleError(res, err.message, "Failed to get contacts.");
     } else {
-      res.status(200).json(docs);
-    var xls = json2xls(docs);
-    fs.writeFileSync('data.xlsx', xls, 'binary');
-    res.download('/data.xlsx')
-    //var file = new File(xls, {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-//saveAs(file, "data.xlsx");
+      var xls = json2xls(docs);
+      res.status(200);
+      res.setHeader('Content-Type', 'application/vnd.ms-excel');
+      res.setHeader('Content-Disposition', `attachment; filename=data.xlsx`);
+
+      //fs.writeFileSync('data.xlsx', xls, 'binary');
+
+      res.end(fs.readFileSync('data.xlsx', 'binary'));
+
+      console.log("got to export");
     }
  });
 });
@@ -105,7 +112,6 @@ app.post('/api/heroes', function(req, res) {
  */
 
 app.get("/api/heroes/:id", function(req, res) {
-  console.log("my id: ",req.params.id);
   obj_id = ObjectID.createFromHexString(req.params.id)
   db.collection(CONTACTS_COLLECTION).findOne({ _id: obj_id }, function(err, doc) {
     if (err) {
@@ -117,7 +123,6 @@ app.get("/api/heroes/:id", function(req, res) {
 });
 
 app.put("/api/heroes/:id", function(req, res) {
-  console.log("WENT IN");
   obj_id = ObjectID.createFromHexString(req.params.id)
   var updateDoc = req.body;
   delete updateDoc._id;
@@ -128,8 +133,6 @@ app.put("/api/heroes/:id", function(req, res) {
     } else {
       updateDoc._id = req.params.id;
       updateDoc.name = req.params.name;
-      
-
       res.status(200).json(updateDoc);
     }
   });
@@ -138,6 +141,7 @@ app.put("/api/heroes/:id", function(req, res) {
 
 
 app.delete("/api/heroes/:id", function(req, res) {
+  obj_id = ObjectID.createFromHexString(req.params.id)
   db.collection(CONTACTS_COLLECTION).deleteOne({_id: obj_id}, function(err, result) {
     if (err) {
       handleError(res, err.message, "Failed to delete contact");
@@ -149,35 +153,33 @@ app.delete("/api/heroes/:id", function(req, res) {
 
 
 
-app.put("'api/upload/:id'", function(req, res) {
-  console.log("WENT IN");
-  obj_id = ObjectID.createFromHexString(req.params.id)
-  var updateDoc = req.body.image;
-  //delete updateDoc._id;
-
-  db.collection(CONTACTS_COLLECTION).updateOne({_id: obj_id}, updateDoc, function(err, doc) {
-    if (err) {
-      handleError(res, err.message, "Failed to update contact");
-    } else {
-      updateDoc._id = req.params.id;
-      updateDoc.name = req.params.name;
-      
-
-      res.status(200).json(updateDoc);
-    }
-  });
-});
 
 
 
-app.get("/api/login", function(req, res) {
-  console.log("my body: ",req.params.body);
-   var username = req.body.username;
-   var password = req.body.password;
+app.post("/api/login", function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
   
   db.collection(USERS_COLLECTION).findOne({username: username, password:password}, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to get contact");
+    } else {
+      if(doc)res.status(200).json(doc);
+      
+    else res.status(404).json(doc);
+      
+   
+    }
+  });
+});
+
+app.put('/api/upload/:id', function(req, res) {
+  obj_id = ObjectID.createFromHexString(req.params.id)
+  var image = req.body._dataURL;
+ console.log(image)
+ db.collection(CONTACTS_COLLECTION).updateOne({_id: obj_id},   {$set : {"image":image}}, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to update contact");
     } else {
       res.status(200).json(doc);
     }

@@ -23,6 +23,7 @@ export class Hero {
   buttocks_cushion_size:string;
   extra_cushion:string;
   have_taken_photo:string;
+  
   date:string;
   ordered:string;
   recieved:string;

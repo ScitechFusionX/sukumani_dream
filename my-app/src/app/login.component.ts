@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Hero }        from './hero';
+import { User }        from './user';
 import { HeroService } from './hero.service';
 
 
@@ -10,11 +10,15 @@ import { HeroService } from './hero.service';
   styleUrls: [ './login.component.css' ]
 })
 export class LoginComponent {
+  
+  user: User;
  constructor(
     private heroService: HeroService,
   ) {}
 
-    loginAccount(name:string, password:string): void {
-      this.heroService.login(name,password);
+    loginAccount(username:string, password:string): void {
+      this.heroService.login(username,password).subscribe();
+      console.log("got here");
   }
 }
+

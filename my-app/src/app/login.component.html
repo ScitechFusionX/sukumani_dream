@@ -1,5 +1,5 @@
     <div>
-        <input  [(ngModel)]="name" placeholder="Username"/>
-        <input  [(ngModel)]="password" placeholder="Password"/>
-        <button (click)="loginAccount(name, password)">Login</button>
+        <input type="text" #username placeholder="Username"/>
+        <input type="password" #password placeholder="Password"/>
+        <button (click)="loginAccount(username.value, password.value)">Login</button>
     </div>

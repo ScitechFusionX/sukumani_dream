@@ -34,6 +34,10 @@ export class HeroDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
+  
+  onChange(event) {
+    var file = event;
+    this.heroService.sendPic(file, this.hero);
+  }
   
 }

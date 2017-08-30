@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {saveAs as importedSaveAs} from "file-saver";
 
 import { Hero }        from './hero';
 import { HeroService } from './hero.service';
@@ -17,11 +18,10 @@ export class DashboardComponent implements OnInit {
     this.heroService.getHeroes()
       .then(heroes => this.heroes = heroes.slice(-4));
   }
-
+  
   export(): void {
-    this.heroService.getHeroesExport();
+    this.heroService.getHeroesExport().subscribe(blob => {
+            importedSaveAs(blob, "data.xlsx");
+        })
   }
-
-
-
 }

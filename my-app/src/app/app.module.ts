@@ -16,6 +16,8 @@ import { HeroDetailComponent }  from './hero-detail.component';
 import { HeroService }          from './hero.service';
 import { HeroSearchComponent }  from './hero-search.component';
 
+import { FilePickerModule } from 'angular-file-picker'
+
 
 
 
@@ -26,6 +28,7 @@ import { HeroSearchComponent }  from './hero-search.component';
     FormsModule,
     HttpModule,
     AppRoutingModule,
+    FilePickerModule,
     ImageUploadModule.forRoot()
   ],
   declarations: [
