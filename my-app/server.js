@@ -3,7 +3,7 @@ var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var json2xls = require("json2xls");
 
-var mime = require('mime');
+//var mime = require('mime');
 //var file_saver = require("file-saver");
 var ObjectID = mongodb.ObjectID;
 
@@ -185,3 +185,16 @@ app.put('/api/upload/:id', function(req, res) {
     }
   });
 });
+
+
+/*app.get(`api/heroes/?name=${term}`, function(req, res) {
+  db.collection(CONTACTS_COLLECTION).find({ $text: { $search: req.query.q } }).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get contacts.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});*/
+
+
